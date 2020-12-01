@@ -1,0 +1,25 @@
+
+version: '3'
+
+services:
+    php:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        volumes:
+            - ./:/var/www/repo_reader/
+        networks:
+            - symfony
+    nginx:
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        volumes:
+            - ./:/var/www/repo_reader/
+        ports:
+            - 8000:80
+        networks:
+            - symfony
+
+networks:
+    symfony:
